@@ -1,0 +1,6 @@
+*.Rhistory
+.Rhistory
+output/
+data_orgn/
+input/
+ipynb_checkpoints/
