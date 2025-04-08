@@ -1,9 +1,8 @@
-#/2424
+#/2425
 # Authors:     SCB
 # Maintainers: SCB
 # Copyright:   2025
 # =========================================
-# CO-JEP/individual-GRAI/fase3/SANTUARIOS_DE_PAZ/clean/Makefile
 
 HERE := $(shell git rev-parse --show-toplevel)
 
