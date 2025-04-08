@@ -384,40 +384,42 @@ clasificacion_hecho = {
     }
 
 def cannclz_test(df_i):
-
-    (
+    
+    error_perp = (
         df_i
         .with_columns(
             N_missing=pl.sum_horizontal(pl.col(perp_cols).is_null()),
-            N_perps=pl.sum_horizontal(pl.col(perp_cols))
-        )
+            N_perps=pl.sum_horizontal(pl.col(perp_cols)))
         .select(
             (
                 (pl.col("N_missing") == 9) | 
                 (pl.col("N_perps").is_not_null() & (pl.col("N_perps") >= 1))
             ).all()
         )
-        .pipe(lambda x: x.item() or print("Filas inválidas detectadas"))
+        .item()
     )
     
-    error_sex = df_i.filter(
-        (
-            (pl.col("sexo_h") == "INTERSEXUAL") &
-            (pl.col("osigd_h") != "SI")
-        ) |
-        (
-            (pl.col("identidad_de_genero_h") == "TRANSGENERO") &
-            (pl.col("osigd_h") != "SI")
-            
-        ) |
-        (
-            (pl.col("identidad_de_genero_h").is_in(["BISEXUAL",
+    error_sex = (
+        df_i
+        .filter(
+            (
+                (pl.col("sexo_h") == "INTERSEXUAL") &
+                (pl.col("osigd_h") != "SI"))
+            |
+            (
+                (pl.col("identidad_de_genero_h") == "TRANSGENERO") &
+                (pl.col("osigd_h") != "SI"))
+            |
+            (
+                (pl.col("identidad_de_genero_h").is_in(["BISEXUAL",
                                                     "HOMOSEXUAL",
                                                     "ASEXUAL"])) &
-            (pl.col("osigd_h") != "SI")
+                (pl.col("osigd_h") != "SI"))
+            )
         )
-    )   
 
+    if not error_perp:
+        raise AssertionError(f"Error columnas perpetrador")
     if not error_sex.height == 0:
         raise AssertionError(f"Error combinaciones de valores en maestra sexo")
     if not fields_canonicalized.issubset(df_i.columns):
