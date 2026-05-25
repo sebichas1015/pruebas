@@ -2,7 +2,7 @@
 
 El presente archivo README tiene como propósito describir en términos generales el flujo de trabajo para los procesos de migración de tablas al aplicativo Júpiter.
 
-Flujo de tareas: `import_individual` &rightarrow; `class_entities` &rightarrow; `pivot` &rightarrow; `clean_entities` &rightarrow; `new_vars` &rightarrow; `match` &rightarrow; `append` (opcional) &rightarrow; `registraduria` &rightarrow; `filter` &rightarrow; `export`
+Flujo de tareas: `import_individual` &rightarrow; `class_entities` &rightarrow; `pivot` (opcional) &rightarrow; `clean_entities` &rightarrow; `new_vars` &rightarrow; `match` &rightarrow; `merge_values` &rightarrow; `append`
 
 ### `1. import_individual (automatizada)`
 
@@ -12,7 +12,7 @@ Se procede a traer las salidas de `registraduría`, los archivos -canon de `cano
 
 Una vez se trae la totalidad de salidas de las tareas anteriormente descritas, se consolida una tabla única la cual contendría las variables originales de la tabla así como las columnas que fueron procesadas en el flujo.
 
-### `class_entities (automatizada)`
+### `2. class_entities (automatizada)`
 
 Esta tarea busca clasificar el tipo de registro en términos del tipo de entidad al que refiere.
 
@@ -22,7 +22,7 @@ En segundo lugar, se procede con la unión de tablas de forma lateral (left_join
 
 Por último, se realiza el cálculo del exact_id para la totalidad de registros de la tabla. La generación de este código hash tendrá en cuenta -entre otras- la variable de tipo_registro.
 
-### `2. pivot (semi-automatizada)`
+### `3. pivot (semi-automatizada)`
 
 La tarea pivot tiene por objeto llevar la tabla objeto de migración al formato tidy-data, esto es: a) cada variable forma una columna, b) cada observación constituye una fila y c) cada valor es una celda. Filas, columnas y celdas deben referir a un único objeto en el mundo o a una única carácterística de ese objeto.
 
@@ -41,7 +41,7 @@ La salida de la presente tarea debe satisfacer las siguientes aserciones:
 
 Posteriormente, el test_pivot.R verificara cada una de las anteriores aseciones. Este script deberá llamarse al final de la tarea pivot.
 
-### `3. clean_entities (automatizada)`
+### `4. clean_entities (automatizada)`
 
 Esta tarea se dirige a limpiar los valores y registros en relación con el tipo de entidad al que refieren. En síntesis, la presente tarea realiza las siguientes operaciones:
 
@@ -51,7 +51,7 @@ Esta tarea se dirige a limpiar los valores y registros en relación con el tipo 
 - Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNICADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
 - Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.
 
-### `4. new_vars`
+### `5. new_vars`
 
 En esta tarea se procede con la creación, estandarización y homologación de los campos que se requieren para ser cargados al aplicativo Júpiter. Estos campos se clasifican en campos que refieren a la a) entidad, b) al hecho y c) a la informaciónde la entidad al momento de los hechos.
 
@@ -101,7 +101,7 @@ Corresponde a los campos que describen la entidad y que no varían en el tiempo 
 
 (pentiente describir el test de new vars el cual evaluar que las variables esten, que tengan el formato que deberían tener y que los valores sean consistentes con el diccionario)
 
-### `5. match (Semi-automatizada)`
+### `6. match (Semi-automatizada)`
 
 Esta tarea tiene como propósito realizar la vinculación de registros que pertenecen a una misma entidad persona natural. El producto concreto de esta tarea es un identificador de personas únicas que repite en todos los registros que refieren a la misma persona natural.
 
