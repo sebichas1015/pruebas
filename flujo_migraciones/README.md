@@ -22,4 +22,14 @@ En segundo lugar, se procede con la unión de tablas de forma lateral (left_join
 
 Por último, se realiza el cálculo del exact_id para la totalidad de registros de la tabla. La generación de este código hash tendrá en cuenta -entre otras- la variable de tipo_registro.
 
+### `pivot (semi-automatizada)`
+
+La tarea pivot tiene por objeto llevar la tabla objeto de migración al formato tidy-data, esto es: a) cada variable forma una columna, b) cada observación constituye una fila y c) cada valor es una celda. Filas, columnas y celdas deben referir a un único objeto en el mundo o a una única carácterística de ese objeto.
+
+En este mismo sentido, una de las características
+
+En términos operativos, la tarea se divide en dos scripts. Ambos scripts son opcionales. En caso de que la tabla 
+
+
+
 
