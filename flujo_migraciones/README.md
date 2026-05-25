@@ -26,9 +26,33 @@ Por último, se realiza el cálculo del exact_id para la totalidad de registros 
 
 La tarea pivot tiene por objeto llevar la tabla objeto de migración al formato tidy-data, esto es: a) cada variable forma una columna, b) cada observación constituye una fila y c) cada valor es una celda. Filas, columnas y celdas deben referir a un único objeto en el mundo o a una única carácterística de ese objeto.
 
-En este mismo sentido, una de las características
+En este mismo sentido, una de las características del formato de destino del aplicativo Júpiter es que los grupos armados colectivamente considerados son en sí mismos entidades y por tanto se deben crear nuevos registros para ellos. Por consiguiente, el vínculo entre víctimas y grupos armados -en tanto perpetrador colectivo- se establece a partir de los identificadores del hecho los cuáles se generan en una tarea posterior.
 
-En términos operativos, la tarea se divide en dos scripts. Ambos scripts son opcionales. En caso de que la tabla 
+En términos operativos, la tarea se divide en dos scripts. Ambos scripts son opcionales. Si la tabla a migrar posee información a ser pivoteada, se realizará en la presente tarea y no en ninguna otra.
+
+El primer script debe contener todos los ejercicios de pivoteo a excepción del pivoteo de grupos armados que derivan en nuevas entidades. El segundo script, por su parte, automatiza el pivoteo de grupos armados colectivamente considerados a fin de convertirlos en nuevas entidades.
+
+La salida de la presente tarea debe satisfacer las siguientes aserciones:
+
+- Se debe exportar un archivo llamado cross_walk en formato parquet.
+- El archivo cross_walk debe contener dos columnas llamadas old_recordid, para referirse al `recordid` anterior y una columna `new_recordid` la cual contiene los recordid que se acaban de generar.
+- Los recordid de la salida de class_entities deben ser equivalentes a la columna old_recodid del archivo cross_walk.
+- Deben estar presentes la totalidad de columnas de los archivos `-canon`, a saber:
+
+Posteriormente, el test_pivot.R verificara cada una de las anteriores aseciones. Este script deberá llamarse al final de la tarea pivot.
+
+### `clean_entities (automatizada)`
+
+Esta tarea se dirige a limpiar los valores y registros en relación con el tipo de entidad al que refieren. En síntesis, la presente tarea realiza las siguientes operaciones:
+
+- Se almacena el tipo_registro original
+- Se homologan entidades NN y ALIAS como personas naturales
+- Se homologan los tipo_registro que refieren a COMUNIDADES INDIGENAS y COMUNIDADES AFROCOLOMBIANAS a CAMUNIDADES ETNICAS.
+- Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNICADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
+- Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.  
+
+
+
 
 
 
