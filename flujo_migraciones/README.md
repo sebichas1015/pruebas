@@ -51,13 +51,33 @@ Esta tarea se dirige a limpiar los valores y registros en relación con el tipo 
 - Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNICADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
 - Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.
 
-### `new vars`
+### `new_vars`
 
 En esta tarea se procede con la creación, estandarización y homologación de los campos que se requieren para ser cargados al aplicativo Júpiter. Estos campos se clasifican en campos que refieren a la a) entidad, b) al hecho y c) a la informaciónde la entidad al momento de los hechos.
 
 Esta tarea requiere de la elaboración de tres scripts los cuales llevan las columnas "e_", "h_" e "i_" al formato requerido por Júpiter para la migración. Las salidas de la presente tarea son 3 archivos en formato parquet que deben contener los tres tipos de información anteriormente descritos. Cada uno de estos archivos debe conservar la columna `recordid` a fin de guardar las relaciones con las otras dos tablas. Estos archivos deben poseer el prefijo "e_", "h_" e "i_" a fin de permitir que sean importados por el test de new_vars.
 
-A continuación, se presenta una breve lista de las campos que deben estar presentes en cada una de las tablas:
+A continuación, se presenta una breve lista de las campos que deben estar presentes en cada una de las tablas que resultan de la presente tarea.
+
+#### `h_`
+
+- `h_id`: corresponde al identificador de hechos únicos. Debe guardar una relación de 1 a 1 con las demás variables relativas a la información del hecho.
+- h_evento: Identificador de eventos únicos. Permite agrupar múltiples hechos.
+- h_tipo_hecho: Tipo de violencia o conducta criminal. En la gran mayoría de los casos, se corresponde con la variable hecho_victimizante_h del flujo de individual.
+- h_conducta_penal: Permite tipificar penalmente el hecho reportado.
+- h_categoria_conducta: Es una desagregación de h_tipo_hecho. En la gran mayoría de los casos, se corresponde con la variable clasificacion_hecho_h del flujo de individual.
+- h_tecnica: Tecnicas con las que se cometió el hecho reportado.
+- h_patrones: patrones macrocriminales reportados en el marco del hecho registrado.
+- h_medios_desplegados: Medios desplegados en el marco del hecho registrado.
+- h_es_fecha_inexacta: Indica si la fecha registrada para el hecho es exacta o si no lo es. Es una variable binaria que asume los valores SI o NO.
+- h_fecha_inicial: Fecha inicial en la que tuvo lugar el hecho registrado. (adicional formato).
+- h_fecha_final: Fecha en la termina o consluye el hecho registrado. (adicionar formato)
+- h_departamento: Departamento en el que tuvo lugar el hecho registrado.
+- h_ciudad: Municipio en el que tuvo lugar el hecho registrado.
+- h_centro_poblado: Centro poblado en el que tuvo lugar el hecho registrado.
+- h_vereda: Vereda en la que tuvo lugar el hecho registrado.
+- h_toponimia: 
+  
 
 - asd
 - asd
