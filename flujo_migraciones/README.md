@@ -2,7 +2,10 @@
 
 El presente archivo README tiene como propósito describir en términos generales el flujo de trabajo para los procesos de migración de tablas al aplicativo Júpiter.
 
-Flujo de tareas: `import_individual` &rightarrow; `class_entities` &rightarrow; `pivot` (opcional) &rightarrow; `clean_entities` &rightarrow; `new_vars` &rightarrow; `match` &rightarrow; `merge_values` &rightarrow; `append`
+Flujo de tareas:
+
+`import_individual` &rightarrow; `class_entities` &rightarrow; `pivot` (opcional) &rightarrow; `clean_entities` &rightarrow; `new_vars` &rightarrow; `match` &rightarrow; `merge_values` &rightarrow; `append`
+
 
 ### `1. import_individual (automatizada)`
 
