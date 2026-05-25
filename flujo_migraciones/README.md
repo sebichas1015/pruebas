@@ -4,7 +4,7 @@ El presente archivo README tiene como propósito describir en términos generale
 
 Flujo de tareas: `import_individual` &rightarrow; `class_entities` &rightarrow; `pivot` &rightarrow; `clean_entities` &rightarrow; `new_vars` &rightarrow; `match` &rightarrow; `append` (opcional) &rightarrow; `registraduria` &rightarrow; `filter` &rightarrow; `export`
 
-### `import_individual (automatizada)`
+### `1. import_individual (automatizada)`
 
 Corresponde a la primera tarea del flujo. Esta tarea tiene como propósito juntar las salidas de varias tareas del flujo de individual a fin de traer la totalidad de variables originales de la tabla aun cuando estas no se incluyan en el input-records. Asimismo, también se busca traer las variables que se homologan y estandarizan en individual, puesto que estas variables se incluyen dentro del conjunto de campos del aplicativo Júpiter.
 
@@ -22,7 +22,7 @@ En segundo lugar, se procede con la unión de tablas de forma lateral (left_join
 
 Por último, se realiza el cálculo del exact_id para la totalidad de registros de la tabla. La generación de este código hash tendrá en cuenta -entre otras- la variable de tipo_registro.
 
-### `pivot (semi-automatizada)`
+### `2. pivot (semi-automatizada)`
 
 La tarea pivot tiene por objeto llevar la tabla objeto de migración al formato tidy-data, esto es: a) cada variable forma una columna, b) cada observación constituye una fila y c) cada valor es una celda. Filas, columnas y celdas deben referir a un único objeto en el mundo o a una única carácterística de ese objeto.
 
@@ -41,7 +41,7 @@ La salida de la presente tarea debe satisfacer las siguientes aserciones:
 
 Posteriormente, el test_pivot.R verificara cada una de las anteriores aseciones. Este script deberá llamarse al final de la tarea pivot.
 
-### `clean_entities (automatizada)`
+### `3. clean_entities (automatizada)`
 
 Esta tarea se dirige a limpiar los valores y registros en relación con el tipo de entidad al que refieren. En síntesis, la presente tarea realiza las siguientes operaciones:
 
@@ -51,7 +51,7 @@ Esta tarea se dirige a limpiar los valores y registros en relación con el tipo 
 - Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNICADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
 - Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.
 
-### `new_vars`
+### `4. new_vars`
 
 En esta tarea se procede con la creación, estandarización y homologación de los campos que se requieren para ser cargados al aplicativo Júpiter. Estos campos se clasifican en campos que refieren a la a) entidad, b) al hecho y c) a la informaciónde la entidad al momento de los hechos.
 
@@ -59,10 +59,8 @@ Esta tarea requiere de la elaboración de tres scripts los cuales llevan las col
 
 A continuación, se presenta una breve lista de las campos que deben estar presentes en cada una de las tablas que resultan de la presente tarea.
 
-#### `h_`
+#### `Campos que refieren al hecho h_`
 
-- `h_id`: corresponde al identificador de hechos únicos. Debe guardar una relación de 1 a 1 con las demás variables relativas a la información del hecho.
-- `h_event`o: Identificador de eventos únicos. Permite agrupar múltiples hechos.
 - `h_tipo_hecho`: Tipo de violencia o conducta criminal. En la gran mayoría de los casos, se corresponde con la variable hecho_victimizante_h del flujo de individual.
 - `h_conducta_penal`: Permite tipificar penalmente el hecho reportado.
 - `h_categoria_conducta`: Es una desagregación de h_tipo_hecho. En la gran mayoría de los casos, se corresponde con la variable clasificacion_hecho_h del flujo de individual.
@@ -88,12 +86,49 @@ A continuación, se presenta una breve lista de las campos que deben estar prese
 - `h_otro_nombre_comunidad_etnica`: (pendiente)
 - `h_narrativa`: Campo que permite describir en prosa y en detalle el hecho registrado.
 - `h_victimas_individuales_no_identificadas`: (pendiente).
-- `h_otros_aspectos_a_destacar`: Caracteríticas adicionales del hecho registrado que ameritan ser descritas en el registro.
-- `h_codigo_indexacion_fuente`:
-  
+- `h_motivacion`: Motivaciones de los perpetradores para cometer el hecho registrado.
+- `h_otros_aspectos_a_destacar`: Características adicionales del hecho registrado que ameritan ser descritas en el registro.
+- `h_codigo_indexacion_fuente`: Código de indexación de las fuentes asociadas al hecho registrado.
+- `h_titulo_fuente`: Título de la fuente que reporta el hecho.
+- `h_folio`: Folio de la fuente que reporta el hecho.
 
-- asd
-- asd
+#### `Campos que refieren a la entidad e_`
+
+Corresponde a los campos que describen la entidad y que no varían en el tiempo como lo son la fecha y lugar de nacimiento o la pertenencia étnica. Asimismo, también permiten caracterizar datos de la entidad en la actualidad.
+
+- `e_tipo_entidad`: Tipo de entidad asociada al hecho. En la gran mayorái de los casos, se corresponde con la variable `tipo_registro`.
+- `e_primer_nombre`: Primer nombre de la entidad reportada.
+
+(pentiente describir el test de new vars el cual evaluar que las variables esten, que tengan el formato que deberían tener y que los valores sean consistentes con el diccionario)
+
+### `5. match (Semi-automatizada)`
+
+Esta tarea tiene como propósito realizar la vinculación de registros que pertenecen a una misma entidad persona natural. El producto concreto de esta tarea es un identificador de personas únicas que repite en todos los registros que refieren a la misma persona natural.
+
+Esta tarea se compone de los scripts fastlink y extract_components. Mientras que el primero genera los pares a etiquetar y presenta métricas de similitud, el segundo se ocupa de la transitividad para componentes conectadas.
+
+La tarea de match, a su vez, se subdivide en tres tareas. En lo que sige, se presenta una breve descripción de cada una de ellas.
+
+#### `fastlink (automatizada)`
+
+se realiza con la tabla e_
+
+#### `etiquetado manual de pares`
+
+#### `extract_components (automatizada)`
+
+### `7. gen_ids (automatizada)`
+
+Se procede con la generación de identificadores de hechos, entidades y entidades al momento del hecho. Se recupera el identificador generado en match y se generan los nuevos identificadores aprovechando la información sub-municipal.
+
+### `8. merge_values`
+
+Una vez se generaron los identificadores, se procede a llevar cada tabla a una distribución de 1 a 1 entre sus identificadores y el resto de las variables. Esto se logra a) fusionando algunos valores usando la | como delimitador o eliminando registros inconsistentes que posean menos información.
+
+### `9. append (automatizada)`
+
+Se unen las tres tablas por recordid, se validan la existencia de campos y de sus valores, se valida la distribución 1 a 1, se genera un nuevo recordid, un archivos cross_walk, se eliminan diplicados.
+
 
 
 
