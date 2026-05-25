@@ -4,7 +4,7 @@ El presente archivo README tiene como propósito describir en términos generale
 
 Flujo de tareas:
 
-`import_individual` &rightarrow; `class_entities` &rightarrow; `pivot` (opcional) &rightarrow; `clean_entities` &rightarrow; `new_vars` &rightarrow; `match` &rightarrow; `merge_values` &rightarrow; `append`
+`import_individual` &rightarrow; `class_entities` &rightarrow; `pivot` (opcional) &rightarrow; `clean_entities` &rightarrow; `new_vars` &rightarrow; `match` &rightarrow; `gen_ids` &rightarrow; `merge_values` &rightarrow; `append`
 
 
 ### `1. import_individual (automatizada)`
