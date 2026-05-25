@@ -27,6 +27,8 @@ Por último, se realiza el cálculo del exact_id para la totalidad de registros 
 
 ### `3. pivot (semi-automatizada)`
 
+`pivot` &rightarrow; `pivot_actor`
+
 La tarea pivot tiene por objeto llevar la tabla objeto de migración al formato tidy-data, esto es: a) cada variable forma una columna, b) cada observación constituye una fila y c) cada valor es una celda. Filas, columnas y celdas deben referir a un único objeto en el mundo o a una única carácterística de ese objeto.
 
 En este mismo sentido, una de las características del formato de destino del aplicativo Júpiter es que los grupos armados colectivamente considerados son en sí mismos entidades y por tanto se deben crear nuevos registros para ellos. Por consiguiente, el vínculo entre víctimas y grupos armados -en tanto perpetrador colectivo- se establece a partir de los identificadores del hecho los cuáles se generan en una tarea posterior.
@@ -105,6 +107,8 @@ Corresponde a los campos que describen la entidad y que no varían en el tiempo 
 (pentiente describir el test de new vars el cual evaluar que las variables esten, que tengan el formato que deberían tener y que los valores sean consistentes con el diccionario)
 
 ### `6. match (Semi-automatizada)`
+
+`fastlink` &rightarrow; `extract_components`
 
 Esta tarea tiene como propósito realizar la vinculación de registros que pertenecen a una misma entidad persona natural. El producto concreto de esta tarea es un identificador de personas únicas que repite en todos los registros que refieren a la misma persona natural.
 
