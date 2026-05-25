@@ -62,21 +62,34 @@ A continuación, se presenta una breve lista de las campos que deben estar prese
 #### `h_`
 
 - `h_id`: corresponde al identificador de hechos únicos. Debe guardar una relación de 1 a 1 con las demás variables relativas a la información del hecho.
-- h_evento: Identificador de eventos únicos. Permite agrupar múltiples hechos.
-- h_tipo_hecho: Tipo de violencia o conducta criminal. En la gran mayoría de los casos, se corresponde con la variable hecho_victimizante_h del flujo de individual.
-- h_conducta_penal: Permite tipificar penalmente el hecho reportado.
-- h_categoria_conducta: Es una desagregación de h_tipo_hecho. En la gran mayoría de los casos, se corresponde con la variable clasificacion_hecho_h del flujo de individual.
-- h_tecnica: Tecnicas con las que se cometió el hecho reportado.
-- h_patrones: patrones macrocriminales reportados en el marco del hecho registrado.
-- h_medios_desplegados: Medios desplegados en el marco del hecho registrado.
-- h_es_fecha_inexacta: Indica si la fecha registrada para el hecho es exacta o si no lo es. Es una variable binaria que asume los valores SI o NO.
-- h_fecha_inicial: Fecha inicial en la que tuvo lugar el hecho registrado. (adicional formato).
-- h_fecha_final: Fecha en la termina o consluye el hecho registrado. (adicionar formato)
-- h_departamento: Departamento en el que tuvo lugar el hecho registrado.
-- h_ciudad: Municipio en el que tuvo lugar el hecho registrado.
-- h_centro_poblado: Centro poblado en el que tuvo lugar el hecho registrado.
-- h_vereda: Vereda en la que tuvo lugar el hecho registrado.
-- h_toponimia: 
+- `h_event`o: Identificador de eventos únicos. Permite agrupar múltiples hechos.
+- `h_tipo_hecho`: Tipo de violencia o conducta criminal. En la gran mayoría de los casos, se corresponde con la variable hecho_victimizante_h del flujo de individual.
+- `h_conducta_penal`: Permite tipificar penalmente el hecho reportado.
+- `h_categoria_conducta`: Es una desagregación de h_tipo_hecho. En la gran mayoría de los casos, se corresponde con la variable clasificacion_hecho_h del flujo de individual.
+- `h_tecnica`: Tecnicas con las que se cometió el hecho reportado.
+- `h_patrones`: patrones macrocriminales reportados en el marco del hecho registrado.
+- `h_medios_desplegados`: Medios desplegados en el marco del hecho registrado.
+- `h_es_fecha_inexacta`: Indica si la fecha registrada para el hecho es exacta o si no lo es. Es una variable binaria que asume los valores SI o NO.
+- `h_fecha_inicial`: Fecha inicial en la que tuvo lugar el hecho registrado. (adicional formato).
+- `h_fecha_final`: Fecha en la termina o consluye el hecho registrado. (adicionar formato)
+- `h_departamento`: Departamento en el que tuvo lugar el hecho registrado.
+- `h_ciudad`: Municipio en el que tuvo lugar el hecho registrado.
+- `h_centro_poblado`: Centro poblado en el que tuvo lugar el hecho registrado.
+- `h_vereda`: Vereda en la que tuvo lugar el hecho registrado.
+- `h_toponimia`: Toponimia en la que tuvo lugar le hecho registrado.
+- `h_coordenada_x`: Coordenada x en la que tuvo lugar el hecho registrado.
+- `h_coordenada_y`: Coordenada y en la que tuvo lugar el hecho registrado.
+- `h_latitud`: Latitud en la que tuvo lugar el hecho registrado.
+- `h_longitud`: Longitud en la que tuvo lugar el hecho registrado.
+- `h_incluye_informacion_etnica`: Indica si el hecho tuvo lugar en un territorio étnico. Se trata de una variable binaria que asume los valores SI o NO.
+- `h_pertenencia_etnica`: Es un campo dependiente de h_incluye_informacion_etnica. Indica la pertenencia étnica del lugar en el que tuvo lugar el hecho. A diferencia de e_pertenencia_etnica, alude al lugar del hecho y no a la pertenencia étnica de la entidad asociada al hecho.
+- `h_comunidad_etnica`: Es un campo dependiente de h_incluye_informacion_etnica y de h_pertenencia_etnica. Indica el pueblo o comunidad étnica a la que pertenece el lugar en el que tuvo lugar el hecho. A diferencia de e_comunidad_etnica, alude al lugar del hecho y no a la pertenencia étnica de la entidad asociada al hecho.
+- `h_nombre_territorio_colectivo`: Es un campo dependiente de h_incluye_informacion_etnica, h_pertenencia_etnica y h_comunidad_etnica. Indica el nombre del territorio colectivo del lugar en el que tuvo lugar el hecho. A diferencia de e_nombre_territorio_colectivo, alude al lugar del hecho y no a la pertenencia étnica de la entidad asociada al hecho.
+- `h_otro_nombre_comunidad_etnica`: (pendiente)
+- `h_narrativa`: Campo que permite describir en prosa y en detalle el hecho registrado.
+- `h_victimas_individuales_no_identificadas`: (pendiente).
+- `h_otros_aspectos_a_destacar`: Caracteríticas adicionales del hecho registrado que ameritan ser descritas en el registro.
+- `h_codigo_indexacion_fuente`:
   
 
 - asd
