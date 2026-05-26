@@ -78,6 +78,7 @@ A continuación, se presenta una breve lista de las campos que deben estar prese
 - `h_departamento`: Departamento en el que tuvo lugar el hecho registrado.
 - `h_ciudad`: Municipio en el que tuvo lugar el hecho registrado.
 - `h_centro_poblado`: Centro poblado en el que tuvo lugar el hecho registrado.
+- `h_commune`: Comuna en la que tuvo lugar el hecho registrado.
 - `h_vereda`: Vereda en la que tuvo lugar el hecho registrado.
 - `h_toponimia`: Toponimia en la que tuvo lugar le hecho registrado.
 - `h_coordenada_x`: Coordenada x en la que tuvo lugar el hecho registrado.
