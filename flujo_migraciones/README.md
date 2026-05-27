@@ -107,6 +107,8 @@ Corresponde a los campos que describen la entidad y que no varían en el tiempo 
 
 (pentiente describir el test de new vars el cual evaluar que las variables esten, que tengan el formato que deberían tener y que los valores sean consistentes con el diccionario)
 
+En el caso de los identificadores i_ se podria hacer un case_when y si se tiene un 0 en e_id o en h_id, se puede establecer que i_ es 0 porque no habría una entidad para un hecho o una entidad sin hecho.
+
 ### `6. match (Semi-automatizada)`
 
 `fastlink` &rightarrow; `extract_components`
