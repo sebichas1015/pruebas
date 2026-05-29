@@ -64,7 +64,7 @@ Esta tarea requiere de la elaboración de tres scripts los cuales llevan las col
 
 A continuación, se presenta una breve lista de las campos que deben estar presentes en cada una de las tablas que resultan de la presente tarea.
 
-#### `Campos que refieren al hecho h_`
+#### `5.1 Campos que refieren al hecho h_ (new_vars_h.R)`
 
 - `h_tipo_hecho`: Tipo de violencia o conducta criminal. En la gran mayoría de los casos, se corresponde con la variable hecho_victimizante_h del flujo de individual.
 - `h_conducta_penal`: Permite tipificar penalmente el hecho reportado.
@@ -98,7 +98,7 @@ A continuación, se presenta una breve lista de las campos que deben estar prese
 - `h_titulo_fuente`: Título de la fuente que reporta el hecho.
 - `h_folio`: Folio de la fuente que reporta el hecho.
 
-#### `Campos que refieren a la entidad e_`
+#### `5.2 Campos que refieren a la entidad e_ (new_vars_e.R)`
 
 Corresponde a los campos que describen la entidad y que no varían en el tiempo como lo son la fecha y lugar de nacimiento o la pertenencia étnica. Asimismo, también permiten caracterizar datos de la entidad en la actualidad.
 
@@ -108,6 +108,8 @@ Corresponde a los campos que describen la entidad y que no varían en el tiempo 
 (pentiente describir el test de new vars el cual evaluar que las variables esten, que tengan el formato que deberían tener y que los valores sean consistentes con el diccionario)
 
 En el caso de los identificadores i_ se podria hacer un case_when y si se tiene un 0 en e_id o en h_id, se puede establecer que i_ es 0 porque no habría una entidad para un hecho o una entidad sin hecho.
+
+#### `5.3 Campos que refieren a la información de la entidad al momento de los hechos i_ (new_vars_i.R)`
 
 ### `6. match (Semi-automatizada)`
 
@@ -119,13 +121,13 @@ Esta tarea se compone de los scripts fastlink y extract_components. Mientras que
 
 La tarea de match, a su vez, se subdivide en tres tareas. En lo que sige, se presenta una breve descripción de cada una de ellas.
 
-#### `fastlink (automatizada)`
+#### `6.1 fastlink.R (automatizada)`
 
 se realiza con la tabla e_
 
-#### `etiquetado manual de pares`
+#### `6.2 etiquetado manual de pares`
 
-#### `extract_components (automatizada)`
+#### `6.3 extract_components.R (automatizada)`
 
 ### `7. gen_ids (automatizada)`
 
