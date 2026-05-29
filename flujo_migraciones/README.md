@@ -13,7 +13,7 @@ Corresponde a la primera tarea del flujo. Esta tarea tiene como propósito junta
 
 Se procede a traer las salidas de `registraduría`, los archivos -canon de `canonicalize` y la salidas de `pivot` o `clean` dependiendo de cuál de estas sea vaya después en flujo de la tabla a migrar.
 
-Una vez se trae la totalidad de salidas de las tareas anteriormente descritas, se consolida una tabla única la cual contendría las variables originales de la tabla así como las columnas que fueron procesadas en el flujo.
+Una vez se trae la totalidad de salidas de las tareas anteriormente descritas, se consolida una tabla única la cual contendrá las variables originales de la tabla así como las columnas que fueron procesadas en el flujo.
 
 ### `2. class_entities (automatizada)`
 
