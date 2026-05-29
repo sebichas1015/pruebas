@@ -163,7 +163,7 @@ Una vez se generaron los identificadores, se procede a llevar cada tabla a una d
 
 Cada uno de los identificadores del hecho, las entidades y la información de las entidades al momento de los hechos (h_, e_, i_) deben estar asociados a un único valor para la totalidad de los campos de su respectiva tabla. Así, por ejemplo, el identificador del hecho a1 no puede estar asociado -al mismo tiempo- al municipio x1 y al municipio x2. Este tipo de casos van en contravía de la lógica diseñada para el aplicativo júpiter.
 
-No obstante, 
+No obstante, hay información que lógicamente puede establecer una relación de uno a varios. Es el caso de la vinculación de personas naturales a procesos judiciales. Para estos casos, se propone unir las cadenas de texto y separarlas con el operador "|". En contraposición, las variables en donde relaciones de uno a muchos revelan una posible inconsistencia, reciben otro tratamiento. En estos casos se debe identificar cuál de los registros posee menos valores en NA y se procede a conservar ese registro.
 
 ### `9. append (automatizada)`
 
