@@ -113,7 +113,7 @@ En el caso de los identificadores i_ se podria hacer un case_when y si se tiene 
 
 `fastlink` &rightarrow; `extract_components`
 
-Esta tarea tiene como propósito realizar la vinculación de registros que pertenecen a una misma entidad persona natural. El producto concreto de esta tarea es un identificador de personas únicas que repite en todos los registros que refieren a la misma persona natural.
+Esta tarea tiene como propósito realizar la vinculación de registros que pertenecen a una misma entidad persona natural. El producto concreto de esta tarea es un identificador de personas únicas que se relaciona con todos los registros que refieren a la misma persona natural.
 
 Esta tarea se compone de los scripts fastlink y extract_components. Mientras que el primero genera los pares a etiquetar y presenta métricas de similitud, el segundo se ocupa de la transitividad para componentes conectadas.
 
