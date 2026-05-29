@@ -163,7 +163,15 @@ Una vez se generaron los identificadores, se procede a llevar cada tabla a una d
 
 ### `9. append (automatizada)`
 
-Se unen las tres tablas por recordid, se validan la existencia de campos y de sus valores, se valida la distribución 1 a 1, se genera un nuevo recordid, un archivos cross_walk, se eliminan diplicados.
+Esta última tarea tiene como propósito consolidar una tabla única al volver a juntar las tablas de hechos, entidades, e información de la entidad al momento del hecho. Asimismo, esta tarea crea un número recordid, elimina la información duplicada y exporta un archivo cross_walk a fin de no perder las relaciones con las salidas anteriores.
+
+Adicionalmente, la tarea realiza mútiples verificaciones orientadas a validar la consistencia de la tabla con los supuestos que deben serguirse para ser migrada al aplicativo júpiter. Se procede a validar la todalidad de campos, que no se tengan valores obligatorios en NA, que los valores no sean distintos al de los diccionarios etc.
+
+### `10 homl_validate (automatizada)`
+
+Se procede con la homologación de nombres de campos para ajustarlos a los nombres del aplicativo Júpiter y se realizan las últimas validaciones a fin de detectar cualquier tipo de novedad adicional. Es importante mencionar que esta tarea toma como input la tabla de la salida de `append` y la tabla de fuentes. Esta última corresponde a las fuentes que documentan los registros de la tabla de hechos, entidades información al momento de los hechos (hei).
+
+La tarea se divide en 3 scripts. El primero tiene como propósito homologar los nombres de las columnas al formato del aplicativo Júpiter. El segundo script valida los campos de la tabla de fuentes a partir del diccionario de Júpiter. Esta evaluación tiene en cuenta la longitud de caracteres permitida, el tipo de variable, la existencia de campos dependientes etc. En tercer script realiza un ejercicio similar al anterior, pero aplicado a la tabla hei. El resultado de estos dos últimos scripts son tablas que idenfican los campos con inconsistencias a la vez que enuncian una breve descripción que permite proceder con los ajustes correspondientes. 
 
 
 
