@@ -135,11 +135,27 @@ NOTA IMPORTANTE: Bajo ningún motivo se deben subir al repositorio de github reg
 
 #### `6.3 extract_components.R (automatizada)`
 
+Esta tercera tarea de match tiene como propósito identificar la totalidad de registros que deberían asociarse bajo un mismo `match_group_id`. En la tarea anterior se identificaron pares de registros que deberían vincularse. No obstante, se suele dar el caso que, por ejmplo, A y B fueron etiquetados como pertenencientes a una misma entidad. Asimismo, B y C se etiqueraon como pertenecientes a una misma entidad. Pero nunca se dio la comparación entre A y C. El presente registro realiza ese vínculo de registros bajo la premisa de que si A = B y B = C, entonces A = C.
 
+El resultado final de esta subtarea es un archivo que contienen una columna de `exact_id` y los `match_group_id` que los agrupan.
 
 ### `7. gen_ids (automatizada)`
 
 Se procede con la generación de identificadores de hechos, entidades y entidades al momento del hecho. Se recupera el identificador generado en match y se generan los nuevos identificadores aprovechando la información sub-municipal.
+
+Como lo indica su nombre, esta tarea se encarga de generar los identificadores de hechos, entidades y entidades al momento de los hechos para las tablas e_, h_, i_. En este apartado se describe como se genera el código hash en cada caso.
+
+En primer lugar, para el caso de las entidades (e_), se procede a realizar un cálculo atendiendo al tipo de entidad en cada caso. Para las entidades GRUPO ARMADO, se realiza un cálculo basado en las columnas `e_actor`, `e_grupo`, `e_estructura_nivel_1`,  `e_estructura_nivel_2`, `e_estructura_nivel_3`, `e_estructura_nivel_4`, las cuáles permiten identificar e individualizar a los grupos armados.
+
+En línea con lo anterior, el cálculo del identificador de entidades COMUNIDADES ETNICAS se genera atendiendo a las columnas `e_tipo_entidad`, `e_pertenencia_etnica`, `e_comunidad_etnica`, `e_territorio_colectivo`, `e_nombre_comunidad_etnica`, a fin de crear entidades con base en la coincidencia de campos que refieren a las cacterísticas étnicas de la entidad.
+
+Las entidades PERSONA JUÍRICA reciben un trato similar, en tanto que su identificador se construye a partir de las columnas `e_razon_social` y `e_nit`.
+
+En el caso de las personas naturales, se establecen dos reglas. La primera es recuperar los mgis de la salida de `extract_components`. La segunda regla es que, para todas las demas entidades PERSONA NATURAL, se procede a asignarle el exact_id anteriormente calculado.
+
+El tratamiento de hechos sigue una lógica similar. El identificador de hechos únicos se genera a partir de la coincidencia de` h_tipo_hecho`, `h_fecha_inicial`, `h_fecha_final`, `h_departamento`, `h_ciudad`, `h_centro_poblado`, `h_vereda`, esto es, se identifican hechos a partir de las variables del qué, cuando y dónde. Adicional a esto último, el código admite adicionar alguna otra variable que permita mejorar la agrupación de registros al momento de identificar hechos únicos. En caso de contar con un identificador de hechos original de la tabla, el makefile permite adicionarlo como un argumento que se adicionaría a las variables mencionadas.
+
+Finalmente, el identificador de la información al momento de los hechos se genera como una combinación entre hechos y entidades. Es importante mencionar que a los hechos sin entidades o a las entidades sin hechos se les asignará un "0" en su identificador con objeto de evitar su migración a Júpiter.
 
 ### `8. merge_values`
 
