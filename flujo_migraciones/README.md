@@ -159,7 +159,11 @@ Finalmente, el identificador de la información al momento de los hechos se gene
 
 ### `8. merge_values`
 
-Una vez se generaron los identificadores, se procede a llevar cada tabla a una distribución de 1 a 1 entre sus identificadores y el resto de las variables. Esto se logra a) fusionando algunos valores usando la | como delimitador o eliminando registros inconsistentes que posean menos información.
+Una vez se generaron los identificadores, se procede a llevar cada tabla a una distribución de 1 a 1 entre sus identificadores y el resto de las variables. Esto se logra a) fusionando algunos valores usando la | como delimitador, o b) eliminando registros inconsistentes que posean menos información.
+
+Cada uno de los identificadores del hecho, las entidades y la información de las entidades al momento de los hechos (h_, e_, i_) deben estar asociados a un único valor para la totalidad de los campos de su respectiva tabla. Así, por ejemplo, el identificador del hecho a1 no puede estar asociado -al mismo tiempo- al municipio x1 y al municipio x2. Este tipo de casos van en contravía de la lógica diseñada para el aplicativo júpiter.
+
+No obstante, 
 
 ### `9. append (automatizada)`
 
