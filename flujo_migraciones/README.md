@@ -23,8 +23,6 @@ En primer lugar, se procede a cargar la tabla producto de la tarea anterior y se
 
 En segundo lugar, se procede con la unión de tablas de forma lateral (left_join) a fin de traer la variable tipo_registro del archivo class_recs. En este punto, se asume que todo aquel registro lo que no cruce con la tabla de class_recs, corresponde a una persona natural.
 
-Por último, se realiza el cálculo del exact_id para la totalidad de registros de la tabla. La generación de este código hash tendrá en cuenta -entre otras- la variable de tipo_registro.
-
 ### `3. pivot (semi-automatizada)`
 
 `pivot` &rightarrow; `pivot_actor`
