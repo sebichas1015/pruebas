@@ -170,6 +170,7 @@ Adicionalmente, la tarea realiza mútiples verificaciones orientadas a validar l
 ### `10 homl_validate (automatizada)`
 
 `homl_jupiter` &rightarrow; `validacion_fuentes_mc`
+
 `homl_jupiter` &rightarrow; `validacion_tabla_hei`
 
 Se procede con la homologación de nombres de campos para ajustarlos a los nombres del aplicativo Júpiter y se realizan las últimas validaciones a fin de detectar cualquier tipo de novedad adicional. Es importante mencionar que esta tarea toma como input la tabla de la salida de `append` y la tabla de fuentes. Esta última corresponde a las fuentes que documentan los registros de la tabla de hechos, entidades información al momento de los hechos (hei).
