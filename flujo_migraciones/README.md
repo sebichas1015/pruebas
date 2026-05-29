@@ -121,11 +121,21 @@ La tarea de match, a su vez, se subdivide en tres tareas. En lo que sige, se pre
 
 #### `6.1 fastlink.R (automatizada)`
 
-se realiza con la tabla e_
+se realiza con la tabla eque refiere a la información de la entidad (e_) posterior a filtrar las peronas naturales que persistieron en el flujo de `individual` hasta `export`. A continuación, se presenta una breve descripción de esta tarea.
+
+En primer lugar, se procede a calcular el exact_id con las columnas (...), las cuales permiten realizar una primera agrupación de registros que se considera pertenecen a la misma entidad personal natural. Posteriormente, se procede a eliminar registros duplicados por exact_id a fin de reducir la cantidad de comparaciones que -en la siguiente subtarea- ingresan al proceso manual de etiquetado. En tercer lugar, se realiza un fastlink a partir de las siguientes variables de identificación de personas naturales: (...). Finalmente, se genera una tabla por pares de registros para ser etiquetados toda vez que se considere que refieren a la misma persona. Si bien el fastlik brinda unas métricas s similitud a fin de facilitar el ejercicio, la decisión final es discrecional para cada analista.
 
 #### `6.2 etiquetado manual de pares`
 
+Esta tarea se realiza sobre el archivo de pares de registros generado en la tarea anterior. La tarea consiste en analizar los pares de registros a la luz de las variables anteriormente descritas y tomar una decisión sobre si ambos registros refieren a la misma persona o si se trata de personas diferentes. En términos operativos, para esta tarea se debe crear una columna columna llamada match y asignarle 0 en caso de que se considere que no es un par positvo, o asignar 1 si se considera que sí se trata de pares positivos y que por tanto que los registros refieren a la misma entidad.
+
+Por último, el archivo etiquetado se debe cargar en una carpeta hand dentro de la carpeta `fastlik`.
+
+NOTA IMPORTANTE: Bajo ningún motivo se deben subir al repositorio de github registros con información de entidades o hechos sensibles. De manera que, al subir el archivo a la carpeta `hand`, se deben eliminar todas las columnas menos los identificadores y el campo de las eiquetas.
+
 #### `6.3 extract_components.R (automatizada)`
+
+
 
 ### `7. gen_ids (automatizada)`
 
