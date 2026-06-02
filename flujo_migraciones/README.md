@@ -21,7 +21,7 @@ Esta tarea busca clasificar el tipo de registro en términos del tipo de entidad
 
 En primer lugar, se procede a cargar la tabla producto de la tarea anterior y se trae el archivo `class_recs` de la tarea `filter` de `individual` a fin de identificar los tipos de entidad que no corresponden a personas naturales o que no cuentan con información suficiente como para ingresar al flujo de `match`.
 
-En segundo lugar, se procede con la unión de tablas de forma lateral (left_join) a fin de traer la variable tipo_registro del archivo class_recs. En este punto, se asume que todo aquel registro lo que no cruce con la tabla de class_recs, corresponde a una persona natural.
+En segundo lugar, se procede con la unión de tablas de forma lateral (left_join) a fin de traer la variable tipo_registro del archivo `class_recs`. En este punto, se asume que todo aquel registro lo que no cruce con la tabla de `class_recs`, corresponde a una persona natural.
 
 ### `3. pivot (semi-automatizada)`
 
@@ -50,8 +50,8 @@ Esta tarea se dirige a limpiar los valores y registros en relación con el tipo 
 
 - Se almacena el tipo_registro original
 - Se homologan entidades NN y ALIAS como personas naturales
-- Se homologan los tipo_registro que refieren a COMUNIDADES INDIGENAS y COMUNIDADES AFROCOLOMBIANAS a CAMUNIDADES ETNICAS.
-- Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNICADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
+- Se homologan los tipo_registro que refieren a COMUNIDADES INDIGENAS y COMUNIDADES AFROCOLOMBIANAS a COMUNIDADES ETNICAS.
+- Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNIDADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
 - Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.
 
 ### `5. new_vars`
