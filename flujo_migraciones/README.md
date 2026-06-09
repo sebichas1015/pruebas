@@ -31,7 +31,7 @@ La tarea pivot tiene por objeto llevar la tabla objeto de migración al formato 
 
 En este mismo sentido, una de las características del formato de destino del aplicativo Júpiter es que los grupos armados colectivamente considerados son en sí mismos entidades y por tanto se deben crear nuevos registros para ellos. Por consiguiente, el vínculo entre víctimas y grupos armados -en tanto perpetrador colectivo- se establece a partir de los identificadores del hecho los cuáles se generan en una tarea posterior.
 
-En términos operativos, la tarea se divide en dos scripts. Ambos scripts son opcionales. Si la tabla a migrar posee información a ser pivoteada, se realizará en la presente tarea y no en ninguna otra.
+En términos operativos, la tarea se divide en dos scripts. El primer de ellos es opcional y el segundo es obligatorio. Si la tabla a migrar posee información a ser pivoteada, se realizará en la presente tarea y no en ninguna otra.
 
 El primer script debe contener todos los ejercicios de pivoteo a excepción del pivoteo de grupos armados que derivan en nuevas entidades. El segundo script, por su parte, automatiza el pivoteo de grupos armados colectivamente considerados a fin de convertirlos en nuevas entidades.
 
