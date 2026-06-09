@@ -169,6 +169,8 @@ No obstante, hay información que lógicamente puede establecer una relación de
 
 Esta última tarea tiene como propósito consolidar una tabla única al volver a juntar las tablas de hechos, entidades, e información de la entidad al momento del hecho. Asimismo, esta tarea crea un número recordid, elimina la información duplicada y exporta un archivo cross_walk a fin de no perder las relaciones con las salidas anteriores.
 
+Al momento de verificar registros duplicados, el código también identifica si existen perpetradores cuyo tipo de entidad es `PERSONA NATURAL`, los hechos asociados a estos últimos y -en los casos en los que aplica- elimina las entidades `GRUPO ARMADO` que comparten los mismos valores en los campos jerárquicos relativos a la estructura armada.
+
 Adicionalmente, la tarea realiza mútiples verificaciones orientadas a validar la consistencia de la tabla con los supuestos que deben serguirse para ser migrada al aplicativo júpiter. Se procede a validar la todalidad de campos, que no se tengan valores obligatorios en NA, que los valores no sean distintos al de los diccionarios etc.
 
 ### `10 homl_validate (automatizada)`
