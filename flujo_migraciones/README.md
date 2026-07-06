@@ -102,6 +102,7 @@ Corresponde a los campos que describen la entidad y que no varían en el tiempo 
 
 - `e_tipo_entidad`: Tipo de entidad asociada al hecho. En la gran mayorái de los casos, se corresponde con la variable `tipo_registro`.
 - `e_primer_nombre`: Primer nombre de la entidad reportada.
+- e_actas_suscritas: Tener en cuenta que los valores deben seguir el siquiente esquema: ["12","321","0025"] solo con valores numéricos.
 
 (pentiente describir el test de new vars el cual evaluar que las variables esten, que tengan el formato que deberían tener y que los valores sean consistentes con el diccionario)
 
