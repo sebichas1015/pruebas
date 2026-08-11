@@ -24,3 +24,38 @@ Hasta este punto, todos los conteos han tenido lugar dentro del estrado de las v
 
 Para este propósito, el conteo de hechos presupone deduplicar los registros que comparten una fecha (a nivel de día), una ubicación (a nivel municipal) y un tipo de hecho. Una vez se satisface este requisito, se habilita la cuantificación de hechos para un determinado estrato. Como se mencionó anteriormente, esta metodología de conteo no presupone ningún tipo de filtro en el campo del tipo sujeto, puesto que es irrelevante si el hecho se encuentra asociado a una víctima, a un perpetrador a ambos o a cualquier otra configuración valores.
 
+## `Implementación operativa de los tipos de conteo`
+
+El presente apartado está orientado a ilustrar con código algunos ejemplos de cómo se implementan los distintos tipos de conteos anteriormente descritos. Es importante señalar que, en todos los casos, la fuente para realizar los conteos corresponde a la `mr-table`. Esta última se encuentra disponible (en el caso de fase4) en: `/datos/observed-analysis-GRAI/fase4/counts/output/mr-table.parquet`.
+
+Antes de pasar a los conteos, se precisa un pequeño ajuste a la mr-table a fin de garantizar que no se presenten errores en la ejecución del código. En concreto, la variable del año se transformará desde un formato de tipo cadena de texto a un formato de números enteros.
+
+
+```R
+mr_table <- read_parquet("/datos/observed-analysis-GRAI/fase4/counts/output/mr-table.parquet")
+
+n_na_yy <- sum(is.na(mr_table$yy_hecho))
+
+mr_table <- mr_table %>% 
+  mutate(yy_hecho = as.integer(yy_hecho)) %>% 
+  verify(sum(is.na(yy_hecho)) == n_na_yy)
+```
+
+En lo que sigue, se presentan distintos ejemplos de las metodologías de conteo anteriormente expuestas.
+
+
+Conteo de víctimas únicas para el municipio de pacho (Cundinamarca) en el periodo comprendido entre los años 1990 – 2005.
+```R
+count_1 <- mr_table %>% 
+  filter(dane_mpio_hecho == "25513",
+         between(yy_hecho, 1990, 2005),
+         tipo_sujeto_agr == "VICTIMA") %>% 
+  summarise(n_vict_uniq = n_distinct(match_group_id, na.rm = TRUE))
+
+```
+
+
+
+
+
+
