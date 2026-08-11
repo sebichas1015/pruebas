@@ -126,6 +126,44 @@ count_6 <- mr_table %>%
 
 ```
 
+### `Códigos de ejemplo para el conteo de hechos`
+```R
+## Conteo de hechos para el municipio de pacho (Cundinamarca) en el periodo comprendido entre los años 1990 – 2005.
+count_6 <- mr_table %>% 
+  filter(dane_mpio_hecho == "25513",
+         between(yy_hecho, 1900, 2005)) %>% 
+  mutate(id_hecho = paste(dane_dpto_hecho, dane_mpio_hecho, yy_hecho,
+                           mm_hecho, dd_hecho, tipo_hecho_agr, sep = "-")) %>% 
+  summarise(n_events = n_distinct(id_hecho))
+```
+
+```R
+## Conteo de hechos para los municipios de Tumaco y Barbacoas (Nariño) para el periodo 1980 – 1998
+## desagregado por municipio.
+count_7 <- mr_table %>% 
+  filter(dane_mpio_hecho %in% c("52835", "52079"),
+         between(yy_hecho, 1980, 1998)) %>% 
+  mutate(id_hecho = paste(dane_dpto_hecho, dane_mpio_hecho, yy_hecho,
+                          mm_hecho, dd_hecho, tipo_hecho_agr, sep = "-")) %>% 
+  group_by(dane_mpio_hecho) %>% 
+  summarise(n_events = n_distinct(id_hecho, na.rm = TRUE)) %>% 
+  ungroup()
+
+```
+
+```R
+## Conteo de hechos en el municipio de Turbo (Antioquia) para el periodo 2000 – 2016
+## desagregado por sexo.
+count_8 <- mr_table %>% 
+  filter(dane_mpio_hecho == "05837",
+         between(yy_hecho, 2000, 2016)) %>%
+  mutate(id_hecho = paste(dane_dpto_hecho, dane_mpio_hecho, yy_hecho,
+                          mm_hecho, dd_hecho, tipo_hecho_agr, sep = "-")) %>% 
+  group_by(sexo) %>% 
+  summarise(n_events = n_distinct(id_hecho, na.rm = TRUE)) %>% 
+  ungroup()
+```
+
 
 
 
