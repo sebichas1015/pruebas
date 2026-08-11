@@ -44,7 +44,7 @@ mr_table <- mr_table %>%
 En lo que sigue, se presentan distintos ejemplos de las metodologías de conteo anteriormente expuestas.
 
 
-Conteo de víctimas únicas para el municipio de pacho (Cundinamarca) en el periodo comprendido entre los años 1990 – 2005.
+### `Códigos de ejemplo para el conteo de víctimas únicas`
 ```R
 ## Conteo de víctimas únicas para el municipio de pacho (Cundinamarca) en el periodo comprendido entre los años 1990 – 2005.
 count_1 <- mr_table %>% 
@@ -54,6 +54,20 @@ count_1 <- mr_table %>%
   summarise(n_vict_uniq = n_distinct(match_group_id, na.rm = TRUE))
 
 ```
+
+```R
+## Conteo de víctimas únicas para los municipios de Tumaco y Barbacoas (Nariño) para el periodo 1980 – 1998 desagregado por municipio.
+count_2 <- mr_table %>% 
+  filter(dane_mpio_hecho %in% c("52835", "52079"),
+         between(yy_hecho, 1980, 1998),
+         tipo_sujeto_agr == "VICTIMA") %>% 
+  #distinct(match_group_id, dane_mpio_hecho, yy_hecho) %>% 
+  group_by(dane_mpio_hecho) %>% 
+  summarise(n_vict_uniq = n_distinct(match_group_id, na.rm = TRUE)) %>% 
+  ungroup()
+
+```
+
 
 
 
