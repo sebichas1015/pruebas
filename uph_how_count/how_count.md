@@ -46,6 +46,7 @@ En lo que sigue, se presentan distintos ejemplos de las metodologías de conteo 
 
 Conteo de víctimas únicas para el municipio de pacho (Cundinamarca) en el periodo comprendido entre los años 1990 – 2005.
 ```R
+## Conteo de víctimas únicas para el municipio de pacho (Cundinamarca) en el periodo comprendido entre los años 1990 – 2005.
 count_1 <- mr_table %>% 
   filter(dane_mpio_hecho == "25513",
          between(yy_hecho, 1990, 2005),
