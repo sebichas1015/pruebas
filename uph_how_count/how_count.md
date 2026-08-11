@@ -83,6 +83,50 @@ count_3 <- mr_table %>%
 ```
 
 
+### `Códigos de ejemplo para el conteo de victimizaciones`
+```R
+## Conteo de victimizaciones para el municipio de pacho (Cundinamarca) en el periodo comprendido entre los años 1990 – 2005.
+count_4 <- mr_table %>% 
+  filter(dane_mpio_hecho == "25513",
+         between(yy_hecho, 1900, 2005),
+         tipo_sujeto_agr == "VICTIMA") %>%
+  distinct(match_group_id, tipo_hecho_agr, yy_hecho, dane_mpio_hecho) %>% 
+  summarise(n_vict_uniq = n()) %>% 
+  ungroup()
+
+
+```
+
+```R
+## Conteo de victimizaciones para los municipios de Tumaco y Barbacoas (Nariño) para el periodo 1980 – 1998
+## desagregado por municipio.
+count_5 <- mr_table %>% 
+  filter(dane_mpio_hecho %in% c("52835", "52079"),
+         between(yy_hecho, 1980, 1998),
+         tipo_sujeto_agr == "VICTIMA") %>%
+  distinct(match_group_id, tipo_hecho_agr, yy_hecho, dane_mpio_hecho) %>% 
+  group_by(dane_mpio_hecho) %>% 
+  summarise(n_vict_uniq = n()) %>% 
+  ungroup()
+
+
+```
+
+```R
+## Conteo de victimizaciones en el municipio de Turbo (Antioquia) para el periodo 2000 – 2016
+## desagregado por sexo.
+count_6 <- mr_table %>% 
+  filter(dane_mpio_hecho == "05837",
+         between(yy_hecho, 2000, 2016),
+         tipo_sujeto_agr == "VICTIMA") %>%
+  distinct(match_group_id, tipo_hecho_agr, yy_hecho, dane_mpio_hecho, sexo) %>% 
+  group_by(sexo) %>% 
+  summarise(n_vict_uniq = n()) %>% 
+  ungroup()
+
+```
+
+
 
 
 
