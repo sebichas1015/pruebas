@@ -56,7 +56,8 @@ count_1 <- mr_table %>%
 ```
 
 ```R
-## Conteo de víctimas únicas para los municipios de Tumaco y Barbacoas (Nariño) para el periodo 1980 – 1998 desagregado por municipio.
+## Conteo de víctimas únicas para los municipios de Tumaco y Barbacoas (Nariño) para el periodo 1980 – 1998
+## desagregado por municipio.
 count_2 <- mr_table %>% 
   filter(dane_mpio_hecho %in% c("52835", "52079"),
          between(yy_hecho, 1980, 1998),
@@ -66,6 +67,19 @@ count_2 <- mr_table %>%
   summarise(n_vict_uniq = n_distinct(match_group_id, na.rm = TRUE)) %>% 
   ungroup()
 
+```
+
+```R
+## Conteo de víctimas únicas en el municipio de Turbo (Antioquia) para el periodo 2000 – 2016
+## desagregado por sexo.
+count_3 <- mr_table %>% 
+  filter(dane_mpio_hecho == "05837",
+         between(yy_hecho, 2000, 2016),
+         tipo_sujeto_agr == "VICTIMA") %>% 
+  #distinct(match_group_id, dane_mpio_hecho, yy_hecho, sexo) %>% 
+  group_by(sexo) %>% 
+  summarise(n_vict_uniq = n_distinct(match_group_id, na.rm = TRUE)) %>% 
+  ungroup()
 ```
 
 
