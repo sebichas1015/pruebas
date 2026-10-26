@@ -52,7 +52,7 @@ Esta tarea requiere de la elaboración de tres scripts los cuales llevan las col
 
 A fin de brindar una lista y descripción de cada uno de los campos de Júpiter, consultar el `Diccionario_Migracion_MC`. Este archivo describe cada campo en términos del tipo de variable que debe recibir, su longitud máxima, su correspondiente catálogo de valores válidos, si se trata de un campo obligatorio, observaciones (explicaciones adicionales para facilitar la comprensión del campo), la sección del aplicativo dónde se aloja el campo, y el nombre exacto que recibe en el aplicativo.
 
-Asimismo, en la ruta `$(HERE)/migraciones/share/new_work_flow/new_vars/` se encuentran los archivos `vars_h.yaml`, `vars_e.yaml` y `vars_i.yaml`, los cuáles contienen la totalidad de variables para las variables del hecho, de la entidad y de la entidad al momento de los hechos, respectivamente. Estos archivos ilustran la forma “limpia” de los nombres de los campos de Júpiter. Posteriormente, en la tarea homl_validate, los nombres de las variables se homologarán automáticamente.
+Asimismo, en la ruta `$(HERE)/migraciones/share/new_work_flow/new_vars/` se encuentran los archivos `vars_h.yaml`, `vars_e.yaml` y `vars_i.yaml`, los cuáles contienen la totalidad de variables para las variables del hecho, de la entidad y de la entidad al momento de los hechos, respectivamente. Estos archivos ilustran la forma “limpia” de los nombres de los campos de Júpiter. Posteriormente, en la tarea `homl_validate`, los nombres de las variables se homologarán automáticamente.
 
 
 ### `6. match (Semi-automatizada)`
