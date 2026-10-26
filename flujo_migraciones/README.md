@@ -50,55 +50,10 @@ En esta tarea se procede con la creación, estandarización y homologación de l
 
 Esta tarea requiere de la elaboración de tres scripts los cuales llevan las columnas "e_", "h_" e "i_" al formato requerido por Júpiter para la migración. Las salidas de la presente tarea son 3 archivos en formato parquet que deben contener los tres tipos de información anteriormente descritos. Cada uno de estos archivos debe conservar la columna `recordid` a fin de guardar las relaciones con las otras dos tablas. Estos archivos deben poseer el prefijo "e_", "h_" e "i_" a fin de permitir que sean importados por el test de new_vars.
 
-A continuación, se presenta una breve lista de las campos que deben estar presentes en cada una de las tablas que resultan de la presente tarea.
+A fin de brindar una lista y descripción de cada uno de los campos de Júpiter, consultar el `Diccionario_Migracion_MC`. Este archivo describe cada campo en términos del tipo de variable que debe recibir, su longitud máxima, su correspondiente catálogo de valores válidos, si se trata de un campo obligatorio, observaciones (explicaciones adicionales para facilitar la comprensión del campo), la sección del aplicativo dónde se aloja el campo, y el nombre exacto que recibe en el aplicativo.
 
-#### `5.1 Campos que refieren al hecho h_ (new_vars_h.R)`
+Asimismo, en la ruta `$(HERE)/migraciones/share/new_work_flow/new_vars/` se encuentran los archivos `vars_h.yaml`, `vars_e.yaml` y `vars_i.yaml`, los cuáles contienen la totalidad de variables para las variables del hecho, de la entidad y de la entidad al momento de los hechos, respectivamente. Estos archivos ilustran la forma “limpia” de los nombres de los campos de Júpiter. Posteriormente, en la tarea homl_validate, los nombres de las variables se homologarán automáticamente.
 
-- `h_tipo_hecho`: Tipo de violencia o conducta criminal. En la gran mayoría de los casos, se corresponde con la variable hecho_victimizante_h del flujo de individual.
-- `h_conducta_penal`: Permite tipificar penalmente el hecho reportado.
-- `h_categoria_conducta`: Es una desagregación de h_tipo_hecho. En la gran mayoría de los casos, se corresponde con la variable clasificacion_hecho_h del flujo de individual.
-- `h_tecnica`: Tecnicas con las que se cometió el hecho reportado.
-- `h_patrones`: patrones macrocriminales reportados en el marco del hecho registrado.
-- `h_medios_desplegados`: Medios desplegados en el marco del hecho registrado.
-- `h_es_fecha_inexacta`: Indica si la fecha registrada para el hecho es exacta o si no lo es. Es una variable binaria que asume los valores SI o NO.
-- `h_fecha_inicial`: Fecha inicial en la que tuvo lugar el hecho registrado. (adicional formato).
-- `h_fecha_final`: Fecha en la termina o consluye el hecho registrado. (adicionar formato)
-- `h_departamento`: Departamento en el que tuvo lugar el hecho registrado.
-- `h_ciudad`: Municipio en el que tuvo lugar el hecho registrado.
-- `h_centro_poblado`: Centro poblado en el que tuvo lugar el hecho registrado.
-- `h_commune`: Comuna en la que tuvo lugar el hecho registrado.
-- `h_vereda`: Vereda en la que tuvo lugar el hecho registrado.
-- `h_toponimia`: Toponimia en la que tuvo lugar le hecho registrado.
-- `h_coordenada_x`: Coordenada x en la que tuvo lugar el hecho registrado.
-- `h_coordenada_y`: Coordenada y en la que tuvo lugar el hecho registrado.
-- `h_latitud`: Latitud en la que tuvo lugar el hecho registrado.
-- `h_longitud`: Longitud en la que tuvo lugar el hecho registrado.
-- `h_incluye_informacion_etnica`: Indica si el hecho tuvo lugar en un territorio étnico. Se trata de una variable binaria que asume los valores SI o NO.
-- `h_pertenencia_etnica`: Es un campo dependiente de h_incluye_informacion_etnica. Indica la pertenencia étnica del lugar en el que tuvo lugar el hecho. A diferencia de e_pertenencia_etnica, alude al lugar del hecho y no a la pertenencia étnica de la entidad asociada al hecho.
-- `h_comunidad_etnica`: Es un campo dependiente de h_incluye_informacion_etnica y de h_pertenencia_etnica. Indica el pueblo o comunidad étnica a la que pertenece el lugar en el que tuvo lugar el hecho. A diferencia de e_comunidad_etnica, alude al lugar del hecho y no a la pertenencia étnica de la entidad asociada al hecho.
-- `h_nombre_territorio_colectivo`: Es un campo dependiente de h_incluye_informacion_etnica, h_pertenencia_etnica y h_comunidad_etnica. Indica el nombre del territorio colectivo del lugar en el que tuvo lugar el hecho. A diferencia de e_nombre_territorio_colectivo, alude al lugar del hecho y no a la pertenencia étnica de la entidad asociada al hecho.
-- `h_otro_nombre_comunidad_etnica`: (pendiente)
-- `h_narrativa`: Campo que permite describir en prosa y en detalle el hecho registrado.
-- `h_victimas_individuales_no_identificadas`: (pendiente).
-- `h_motivacion`: Motivaciones de los perpetradores para cometer el hecho registrado.
-- `h_otros_aspectos_a_destacar`: Características adicionales del hecho registrado que ameritan ser descritas en el registro.
-- `h_codigo_indexacion_fuente`: Código de indexación de las fuentes asociadas al hecho registrado.
-- `h_titulo_fuente`: Título de la fuente que reporta el hecho.
-- `h_folio`: Folio de la fuente que reporta el hecho.
-
-#### `5.2 Campos que refieren a la entidad e_ (new_vars_e.R)`
-
-Corresponde a los campos que describen la entidad y que no varían en el tiempo como lo son la fecha y lugar de nacimiento o la pertenencia étnica. Asimismo, también permiten caracterizar datos de la entidad en la actualidad.
-
-- `e_tipo_entidad`: Tipo de entidad asociada al hecho. En la gran mayorái de los casos, se corresponde con la variable `tipo_registro`.
-- `e_primer_nombre`: Primer nombre de la entidad reportada.
-- e_actas_suscritas: Tener en cuenta que los valores deben seguir el siquiente esquema: ["12","321","0025"] solo con valores numéricos.
-
-(pentiente describir el test de new vars el cual evaluar que las variables esten, que tengan el formato que deberían tener y que los valores sean consistentes con el diccionario)
-
-En el caso de los identificadores i_ se podria hacer un case_when y si se tiene un 0 en e_id o en h_id, se puede establecer que i_ es 0 porque no habría una entidad para un hecho o una entidad sin hecho.
-
-#### `5.3 Campos que refieren a la información de la entidad al momento de los hechos i_ (new_vars_i.R)`
 
 ### `6. match (Semi-automatizada)`
 
