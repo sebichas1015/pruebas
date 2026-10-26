@@ -46,7 +46,7 @@ Posteriormente, el test_pivot.R verificara cada una de las anteriores aseciones.
 
 ### `5. new_vars`
 
-En esta tarea se procede con la creación, estandarización y homologación de los campos que se requieren para ser cargados al aplicativo Júpiter. Estos campos se clasifican en campos que refieren a la a) entidad, b) al hecho y c) a la informaciónde la entidad al momento de los hechos.
+En esta tarea se procede con la creación, estandarización y homologación de los campos que se requieren para ser cargados al aplicativo Júpiter. Estos campos se clasifican en campos que refieren a la a) entidad, b) al hecho y c) a la información de la entidad al momento de los hechos. Estos campos reciben los prefijos "e_", "h_" e "i_", respectivamente. Esta distinción es clave toda vez que permite diferenciar conceptualmente los mismos atributos para contextos diferentes. Así, por ejemplo, permiten diferenciar la pertenencia étnica de la entidad (e_pertenencia_etnica) en contraste con los atributos étnicos del lugar del hecho (h_pertenencia_etnica). 
 
 Esta tarea requiere de la elaboración de tres scripts los cuales llevan las columnas "e_", "h_" e "i_" al formato requerido por Júpiter para la migración. Las salidas de la presente tarea son 3 archivos en formato parquet que deben contener los tres tipos de información anteriormente descritos. Cada uno de estos archivos debe conservar la columna `recordid` a fin de guardar las relaciones con las otras dos tablas. Estos archivos deben poseer el prefijo "e_", "h_" e "i_" a fin de permitir que sean importados por el test de new_vars.
 
