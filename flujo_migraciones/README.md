@@ -44,16 +44,6 @@ La salida de la presente tarea debe satisfacer las siguientes aserciones:
 
 Posteriormente, el test_pivot.R verificara cada una de las anteriores aseciones. Este script deberá llamarse al final de la tarea pivot.
 
-### `4. clean_entities (automatizada)`
-
-Esta tarea se dirige a limpiar los valores y registros en relación con el tipo de entidad al que refieren. En síntesis, la presente tarea realiza las siguientes operaciones:
-
-- Se almacena el tipo_registro original
-- Se homologan entidades NN y ALIAS como personas naturales
-- Se homologan los tipo_registro que refieren a COMUNIDADES INDIGENAS y COMUNIDADES AFROCOLOMBIANAS a COMUNIDADES ETNICAS.
-- Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNIDADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
-- Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.
-
 ### `5. new_vars`
 
 En esta tarea se procede con la creación, estandarización y homologación de los campos que se requieren para ser cargados al aplicativo Júpiter. Estos campos se clasifican en campos que refieren a la a) entidad, b) al hecho y c) a la informaciónde la entidad al momento de los hechos.
@@ -157,6 +147,16 @@ En el caso de las personas naturales, se establecen dos reglas. La primera es re
 El tratamiento de hechos sigue una lógica similar. El identificador de hechos únicos se genera a partir de la coincidencia de` h_tipo_hecho`, `h_fecha_inicial`, `h_fecha_final`, `h_departamento`, `h_ciudad`, `h_centro_poblado`, `h_vereda`, esto es, se identifican hechos a partir de las variables del qué, cuando y dónde. Adicional a esto último, el código admite adicionar alguna otra variable que permita mejorar la agrupación de registros al momento de identificar hechos únicos. En caso de contar con un identificador de hechos original de la tabla, el makefile permite adicionarlo como un argumento que se adicionaría a las variables mencionadas.
 
 Finalmente, el identificador de la información al momento de los hechos se genera como una combinación entre hechos y entidades. Es importante mencionar que a los hechos sin entidades o a las entidades sin hechos se les asignará un "0" en su identificador con objeto de evitar su migración a Júpiter.
+
+### `4. clean_entities (automatizada)`
+
+Esta tarea se dirige a limpiar los valores y registros en relación con el tipo de entidad al que refieren. En síntesis, la presente tarea realiza las siguientes operaciones:
+
+- Se almacena el tipo_registro original
+- Se homologan entidades NN y ALIAS como personas naturales
+- Se homologan los tipo_registro que refieren a COMUNIDADES INDIGENAS y COMUNIDADES AFROCOLOMBIANAS a COMUNIDADES ETNICAS.
+- Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNIDADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
+- Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.
 
 ### `8. merge_values`
 
