@@ -44,7 +44,7 @@ La salida de la presente tarea debe satisfacer las siguientes aserciones:
 
 Posteriormente, el test_pivot.R verificara cada una de las anteriores aseciones. Este script deberá llamarse al final de la tarea pivot.
 
-### `5. new_vars`
+### `4. new_vars`
 
 En esta tarea se procede con la creación, estandarización y homologación de los campos que se requieren para ser cargados al aplicativo Júpiter. Estos campos se clasifican en campos que refieren a la a) entidad, b) al hecho y c) a la información de la entidad al momento de los hechos. Estos campos reciben los prefijos "e_", "h_" e "i_", respectivamente. Esta distinción es clave toda vez que permite diferenciar conceptualmente los mismos atributos para contextos diferentes. Así, por ejemplo, permiten diferenciar la pertenencia étnica de la entidad (e_pertenencia_etnica) en contraste con los atributos étnicos del lugar del hecho (h_pertenencia_etnica). 
 
@@ -53,6 +53,14 @@ Esta tarea requiere de la elaboración de tres scripts los cuales llevan las col
 A fin de brindar una lista y descripción de cada uno de los campos de Júpiter, se recomienda la consulta del `Diccionario_Migracion_MC`. Este archivo describe cada campo en términos del tipo de variable que debe recibir, su longitud máxima, su correspondiente catálogo de valores válidos, si se trata de un campo obligatorio, observaciones (explicaciones adicionales para facilitar la comprensión del campo), la sección del aplicativo dónde se aloja el campo, y el nombre exacto que recibe en el aplicativo.
 
 Asimismo, en la ruta `$(HERE)/migraciones/share/new_work_flow/new_vars/` se encuentran los archivos `vars_h.yaml`, `vars_e.yaml` y `vars_i.yaml`, los cuáles contienen la totalidad de variables para las variables del hecho, de la entidad y de la entidad al momento de los hechos, respectivamente. Estos archivos ilustran la forma “limpia” de los nombres de los campos de Júpiter. Posteriormente, en la tarea `homl_validate`, los nombres de las variables se homologarán automáticamente.
+
+### `5. table_sources`
+
+El resultado de los procesos de migración consta de dos archivos. El primero contiene todos los campos la entidad, el hecho y de la entidad al momento de los hechos (tabla HEI). El segundo corresponde a una tabla que contiene todas las fuentes que documentan el archivo HEI. La presente tarea tiene como propósito automatizar parte de la construcción de esta última tabla.
+
+Esta tarea inicia tomando el índice de fuentes de Júpiter e intenta completar información a partir de joins por código de indexación y por título de la fuente. Esto permite automatizar el diligenciamiento de múltiples campos al aprovechar los ejercicios de sistematización de la información adelantados por el GRAI.
+
+Por último, la tarea recupera los campos que refieren al tipo de entidad, el tipo de sujeto y las fechas del hecho, a fin de completar las variables de si la fuente contiene nombres de víctimas, de responsables y las fechas comprendidas por la fuente.
 
 
 ### `6. match (Semi-automatizada)`
@@ -103,7 +111,7 @@ El tratamiento de hechos sigue una lógica similar. El identificador de hechos �
 
 Finalmente, el identificador de la información al momento de los hechos se genera como una combinación entre hechos y entidades. Es importante mencionar que a los hechos sin entidades o a las entidades sin hechos se les asignará un "0" en su identificador con objeto de evitar su migración a Júpiter.
 
-### `4. clean_entities (automatizada)`
+### `8. clean_entities (automatizada)`
 
 Esta tarea se dirige a limpiar los valores y registros en relación con el tipo de entidad al que refieren. En síntesis, la presente tarea realiza las siguientes operaciones:
 
@@ -113,7 +121,7 @@ Esta tarea se dirige a limpiar los valores y registros en relación con el tipo 
 - Se filtran todos los registros que no refieren PERSONAS JURÍDICAS, COMUNIDADES ETNICAS, GRUPOS ARMADOS Y PERSONAS NATURALES. Los registros filtrados se almacenarán en el archivo filteres_records.parquet.
 - Se convierte a NA todos los valores de las variables que no corresponden al tipo de entidad en cada caso. Así, por ejemplo, variables de sexo, edad, municipio de nacimiento deberían estar en NA para entidades que no son personas naturales.
 
-### `8. merge_values`
+### `9. merge_values`
 
 Una vez se generaron los identificadores, se procede a llevar cada tabla a una distribución de 1 a 1 entre sus identificadores y el resto de las variables. Esto se logra a) fusionando algunos valores usando la | como delimitador, o b) eliminando registros inconsistentes que posean menos información.
 
@@ -121,7 +129,7 @@ Cada uno de los identificadores del hecho, las entidades y la información de la
 
 No obstante, hay información que lógicamente puede establecer una relación de uno a varios. Es el caso de la vinculación de personas naturales a procesos judiciales. Para estos casos, se propone unir las cadenas de texto y separarlas con el operador "|". En contraposición, las variables en donde relaciones de uno a muchos revelan una posible inconsistencia, reciben otro tratamiento. En estos casos se debe identificar cuál de los registros posee menos valores en NA y se procede a conservar ese registro.
 
-### `9. append (automatizada)`
+### `10. append (automatizada)`
 
 Esta última tarea tiene como propósito consolidar una tabla única al volver a juntar las tablas de hechos, entidades, e información de la entidad al momento del hecho. Asimismo, esta tarea crea un número recordid, elimina la información duplicada y exporta un archivo cross_walk a fin de no perder las relaciones con las salidas anteriores.
 
@@ -129,7 +137,7 @@ Al momento de verificar registros duplicados, el código también identifica si 
 
 Adicionalmente, la tarea realiza mútiples verificaciones orientadas a validar la consistencia de la tabla con los supuestos que deben serguirse para ser migrada al aplicativo júpiter. Se procede a validar la todalidad de campos, que no se tengan valores obligatorios en NA, que los valores no sean distintos al de los diccionarios etc.
 
-### `10 homl_validate (automatizada)`
+### `11. homl_validate (automatizada)`
 
 `homl_jupiter` &rightarrow; `validacion_fuentes_mc`
 
